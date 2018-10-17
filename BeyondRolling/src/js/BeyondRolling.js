@@ -6,7 +6,12 @@
 		now: 0
 	}
 	var _rely = {
-		// 子集移动，再返回到队尾。以此往复
+		/**
+		 *子集移动，再返回到队尾。以此往复
+		 *
+		 * @param {*} childContainerWid
+		 * @param {*} childTextWid
+		 */
 		tipsLoop: function(childContainerWid, childTextWid) {
 			var loopSpeed, duration = _options.duration;
 			if (_options.now == 0) {
@@ -21,14 +26,25 @@
 				_rely.loop(0, childContainerWid);
 			}, loopSpeed);
 		},
-		// 添加的元素移动
+		/**
+		 *添加的元素移动
+		 *
+		 * @param {*} loopSpeed
+		 * @param {*} transformX
+		 */
 		loop: function(loopSpeed, transformX) {
 			$('.child_loop').css({
 				'transition-duration': '' + loopSpeed + 'ms',
 				'transform': 'translate3d(' + transformX + 'px, 0px, 0px)'
 			})
 		},
-		// 获取元素宽度
+		/**
+		 *获取元素宽度
+		 *
+		 * @param {*} html
+		 * @param {*} font
+		 * @returns
+		 */
 		getWidth: function(html, font) {
 			var fon = font || '12px arial',
 				$obj = $('<div>' + html + '</div>')
@@ -46,6 +62,11 @@
 		}
 	}
 	var _plugin_api = {
+		/**
+		 *输出api
+		 *
+		 * @param {*} child
+		 */
 		rolling: function(child) {
 			var fontSize = $(child).css('font-size'),
 				fontFamily = $(child).css('font-family');

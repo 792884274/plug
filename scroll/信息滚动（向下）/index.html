@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+	<script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+	<link type="text/css" href="./src/css/style.css" rel="stylesheet" />
+	<style type="text/css">
+		.list_container{
+			margin-top: -340px;
+		}
+	</style>
+</head>
+<body>
+	<div class="box" id="app">
+		<div class="bcon">
+			<h1>滚动</h1>
+			<!-- 代码开始 -->
+			<div class="list_lh">
+				<div class="list_container">
+					<ul class="">
+						<li v-for="(item, index) in newsList">
+							<p><a href="http://www.16sucai.com/" target="_blank">{{index}}</a><a href="http://www.16sucai.com/" target="_blank" class="btn_lh">领号</a><em>获得</em></p>
+							<p><a href="http://www.16sucai.com/" target="_blank" class="a_blue">{{item.title}}</a><span>17:28:05</span></p>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<!-- 代码结束 -->
+		</div>
+
+	</div>
+	<script src="https://cdn.staticfile.org/jquery/3.3.1/jquery.min.js"></script>
+	<script>
+		new Vue({
+			el: '#app',
+			data: {
+				timer: null,
+				speed:40,
+				newsList:[{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				},{
+					title: '网游战江湖公测豪华礼包'
+				}]
+			},
+			created(){
+				this.$nextTick(()=>{
+					this.scroll()
+				})
+			},
+			methods: {
+				scroll(){
+					this.goMove($("div.list_lh"));   
+				},
+				marquee(obj, step){
+					obj.find("ul").animate({
+						marginTop: '+=1'
+					},0,function(){
+						var s = Math.abs(parseInt($(this).css("margin-top")));
+						if(s >= 5*step){
+							// 此处调用接口，unshift放到数组newsList最前面
+							var len=$(this).find("li").length;
+							$(this).find("li").slice(len-5, len).prependTo($(this));
+							$(this).css("margin-top", 0);							
+						}
+					});
+				},
+				goMove(obj){
+					var obj=$(obj),rowHeight=obj.find('li').outerHeight();
+					this.timer = setInterval(()=>{
+						if(obj.find("ul").height()<=obj.height()){
+							clearInterval(this.timer);
+						}else{
+							this.marquee(obj, rowHeight);
+						}
+					}, this.speed);	
+					obj.hover(()=>{
+						clearInterval(this.timer);
+					},()=>{
+						this.timer = setInterval(()=>{
+							if(obj.find("ul").height()<=obj.height()){
+								clearInterval(this.timer);
+							}else{
+								this.marquee(obj, rowHeight);
+							}
+						}, this.speed);
+					});
+				}
+			}
+		})
+	</script>
+</body>
+</html>
